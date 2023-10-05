@@ -325,6 +325,9 @@ class PlayState extends MusicBeatState
 	// stores the last combo score objects in an array
 	public static var lastScore:Array<FlxSprite> = [];
 
+	// Smooth healthbar
+	var smoothHealth:Float = 1;
+
 	override public function create()
 	{
 		//trace('Playback Rate: ' + playbackRate);
@@ -1127,7 +1130,7 @@ class PlayState extends MusicBeatState
 		if(ClientPrefs.downScroll) healthBarBG.y = 0.11 * FlxG.height;
 
 		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
-			'health', 0, 2);
+			'smoothHealth', 0, 2);
 		healthBar.scrollFactor.set();
 		// healthBar
 		healthBar.visible = !ClientPrefs.hideHud;
@@ -3025,6 +3028,8 @@ class PlayState extends MusicBeatState
 		}
 
 		super.update(elapsed);
+
+		smoothHealth = FlxMath.lerp(smoothHealth, health, CoolUtil.boundTo(elapsed * 20, 0, 1));
 
 		setOnLuas('curDecStep', curDecStep);
 		setOnLuas('curDecBeat', curDecBeat);
