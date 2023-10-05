@@ -4180,11 +4180,16 @@ class PlayState extends MusicBeatState
 		comboSpr.x = coolText.x;
 		comboSpr.acceleration.y = FlxG.random.int(200, 300) * playbackRate * playbackRate;
 		comboSpr.velocity.y -= FlxG.random.int(140, 160) * playbackRate;
-		comboSpr.visible = (!ClientPrefs.hideHud && showCombo);
+		//comboSpr.visible = (!ClientPrefs.hideHud && showCombo);
 		comboSpr.x += ClientPrefs.comboOffset[0];
 		comboSpr.y -= ClientPrefs.comboOffset[1];
 		comboSpr.y += 60;
 		comboSpr.velocity.x += FlxG.random.int(1, 10) * playbackRate;
+
+		if (combo >= 0)
+			{	
+				add(comboSpr);
+			}	
 
 		insert(members.indexOf(strumLineNotes), rating);
 		
@@ -4211,13 +4216,12 @@ class PlayState extends MusicBeatState
 		rating.updateHitbox();
 
 		var seperatedScore:Array<Int> = [];
+		var comboSplit:Array<String> = (combo + "").split('');
 
-		if(combo >= 1000) {
-			seperatedScore.push(Math.floor(combo / 1000) % 10);
+		for (i in 0...comboSplit.length) {
+			var str:String = comboSplit[i];
+			seperatedScore.push(Std.parseInt(str));
 		}
-		seperatedScore.push(Math.floor(combo / 100) % 10);
-		seperatedScore.push(Math.floor(combo / 10) % 10);
-		seperatedScore.push(combo % 10);
 
 		var daLoop:Int = 0;
 		var xThing:Float = 0;
@@ -4268,7 +4272,6 @@ class PlayState extends MusicBeatState
 			numScore.velocity.x = FlxG.random.float(-5, 5) * playbackRate;
 			numScore.visible = !ClientPrefs.hideHud;
 
-			//if (combo >= 10 || combo == 0)
 			if(showComboNum)
 				insert(members.indexOf(strumLineNotes), numScore);
 
