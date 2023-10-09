@@ -14,8 +14,8 @@ import menus.TitleState;
 import data.ClientPrefs;
 //crash handler stuff
 #if CRASH_HANDLER
-import backend.lime.app.Application;
-import backend.openfl.events.UncaughtErrorEvent;
+import lime.app.Application;
+import openfl.events.UncaughtErrorEvent;
 import haxe.CallStack;
 import haxe.io.Path;
 import backend.Discord.DiscordClient;
