@@ -1,7 +1,7 @@
 package options;
 
 #if desktop
-import Discord.DiscordClient;
+import backend.Discord.DiscordClient;
 #end
 import flash.text.TextField;
 import flixel.FlxG;
@@ -23,8 +23,14 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
-import Controls;
-
+import data.Controls;
+import options.*;
+import ui.Alphabet;
+import backend.Paths;
+import menus.MainMenuState;
+import data.MusicBeatState;
+import data.ClientPrefs;
+import ui.LoadingState;
 using StringTools;
 
 class OptionsState extends MusicBeatState
@@ -37,17 +43,17 @@ class OptionsState extends MusicBeatState
 	function openSelectedSubstate(label:String) {
 		switch(label) {
 			case 'Strum Colors':
-				openSubState(new options.NotesSubState());
+				openSubState(new NotesSubState());
 			case 'Keybinds':
-				openSubState(new options.ControlsSubState());
+				openSubState(new ControlsSubState());
 			case 'Performance':
-				openSubState(new options.GraphicsSettingsSubState());
+				openSubState(new GraphicsSettingsSubState());
 			case 'UI':
-				openSubState(new options.VisualsUISubState());
+				openSubState(new VisualsUISubState());
 			case 'Gameplay':
-				openSubState(new options.GameplaySettingsSubState());
+				openSubState(new GameplaySettingsSubState());
 			case 'Adjust Delay and Combo':
-				LoadingState.loadAndSwitchState(new options.NoteOffsetState());
+				LoadingState.loadAndSwitchState(new NoteOffsetState());
 		}
 	}
 

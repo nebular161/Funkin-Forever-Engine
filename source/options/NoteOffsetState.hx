@@ -13,7 +13,15 @@ import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.ui.FlxBar;
 import flixel.math.FlxPoint;
-
+import data.MusicBeatState;
+import gameplay.objects.Character;
+import backend.Paths;
+import data.Controls;
+import data.ClientPrefs;
+import ui.Alphabet;
+import gameplay.CustomFadeTransition;
+import gameplay.objects.BGSprite;
+import gameplay.Conductor;
 using StringTools;
 
 class NoteOffsetState extends MusicBeatState

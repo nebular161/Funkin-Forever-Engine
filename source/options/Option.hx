@@ -19,8 +19,9 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
-import Controls;
-
+import data.Controls;
+import ui.Alphabet;
+import data.ClientPrefs;
 using StringTools;
 
 class Option

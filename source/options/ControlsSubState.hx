@@ -1,7 +1,7 @@
 package options;
 
 #if desktop
-import Discord.DiscordClient;
+import backend.Discord.DiscordClient;
 #end
 import flash.text.TextField;
 import flixel.FlxG;
@@ -23,8 +23,13 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
-import Controls;
-
+import data.Controls;
+import data.MusicBeatSubstate;
+import ui.Alphabet;
+import data.ClientPrefs;
+import data.InputFormatter;
+import ui.AttachedText;
+import backend.Paths;
 using StringTools;
 
 class ControlsSubState extends MusicBeatSubstate {

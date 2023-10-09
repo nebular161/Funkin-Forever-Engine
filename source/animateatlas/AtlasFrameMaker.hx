@@ -21,8 +21,10 @@ import sys.io.File;
 import js.html.FileSystem;
 import js.html.File;
 #end
-
+import backend.Paths;
+import gameplay.PlayState;
 using StringTools;
+
 class AtlasFrameMaker extends FlxFramesCollection
 {
 	//public static var widthoffset:Int = 0;
