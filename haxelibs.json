@@ -37,6 +37,9 @@
             "name": "openfl", "type": "git", "dir": "openfl", "ref": "master", "url": "https://github.com/openfl/openfl"
         },
         {
+            "name": "linc_luajit", "type": "git", "dir": "openfl", "ref": "master", "url": "https://github.com/nebulazorua/linc_luajit.git"
+        },
+        {
             "name": "faxe", "type": "git", "dir": "faxe", "ref": "master", "url": "https://github.com/uhrobots/faxe"
         },        
         {
