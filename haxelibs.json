@@ -31,7 +31,7 @@
              "name": "lime", "type": "haxelib", "version": null
         },             
         {
-            "name": "linc_discord-rpc", "type": "git", "dir": "discord_rpc", "ref": "master", "url": "https://github.com/Aidan63/linc_discord-rpc"
+            "name": "discord_rpc", "type": "git", "dir": "discord_rpc", "ref": "master", "url": "https://github.com/Aidan63/linc_discord-rpc"
         },
         {
             "name": "openfl", "type": "git", "dir": "openfl", "ref": "master", "url": "https://github.com/openfl/openfl"
