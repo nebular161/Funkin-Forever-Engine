@@ -78,7 +78,7 @@ class VisualsUISubState extends BaseOptionsMenu
 			"If unchecked, disables the Score text zooming\neverytime you hit a note.",
 			'scoreZoom',
 			'bool',
-			true);
+			false);
 		addOption(option);
 
 		var option:Option = new Option('Health Bar Transparency',
