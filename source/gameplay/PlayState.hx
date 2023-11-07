@@ -1172,7 +1172,7 @@ class PlayState extends MusicBeatState
 	if (ClientPrefs.watermark)
 	{
 		engineWatermark = new FlxText(healthBarBG.x + healthBarBG.width + 150, healthBarBG.y + 40, 0,
-		(Main.watermarks ? "Mint Engine Beta " + MainMenuState.mintEngineVersion: ""), 50);
+		(Main.watermarks ? "Mint Engine":""), 50);
 		engineWatermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		engineWatermark.scrollFactor.set();
 		add(engineWatermark);
@@ -1210,6 +1210,7 @@ class PlayState extends MusicBeatState
 		timeBarBG.cameras = [camHUD];
 		timeTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
+		engineWatermark.cameras = [camHUD];
 
 		// if (SONG.song == 'South')
 		// FlxG.camera.alpha = 0.7;
