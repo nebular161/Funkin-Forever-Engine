@@ -2735,7 +2735,6 @@ class PlayState extends MusicBeatState
 			{
 				babyArrow.alpha = targetAlpha;
 			}
-
 			if (player == 1)
 			{
 				playerStrums.add(babyArrow);

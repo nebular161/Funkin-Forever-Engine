@@ -255,7 +255,7 @@ class ChartingState extends MusicBeatState
 		ignoreWarnings = FlxG.save.data.ignoreWarnings;
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.scrollFactor.set();
-		bg.color = 0xFF00FFAA;
+		bg.color = 0xFF00A06B;
 		add(bg);
 
 		gridLayer = new FlxTypedGroup<FlxSprite>();

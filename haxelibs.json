@@ -34,7 +34,7 @@
             "name": "discord_rpc", "type": "git", "dir": "discord_rpc", "ref": "master", "url": "https://github.com/Aidan63/linc_discord-rpc"
         },
         {
-            "name": "openfl", "type": "git", "dir": "openfl", "ref": "master", "url": "https://github.com/openfl/openfl"
+            "name": "openfl", "type": "haxelib", "version": "9.2.1"
         },
         {
             "name": "linc_luajit", "type": "git", "dir": "openfl", "ref": "master", "url": "https://github.com/nebulazorua/linc_luajit.git"
