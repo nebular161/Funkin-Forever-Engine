@@ -190,7 +190,7 @@ class PlayState extends MusicBeatState
 	public var playerStrums:FlxTypedGroup<StrumNote>;
 	public var grpNoteSplashes:FlxTypedGroup<NoteSplash>;
 
-	public var camZooming:Bool = false;
+	public var camZooming:Bool = true;
 	public var camZoomingMult:Float = 1;
 	public var camZoomingDecay:Float = 1;
 	private var curSong:String = "";
@@ -228,6 +228,8 @@ class PlayState extends MusicBeatState
 
 	public var botplaySine:Float = 0;
 	public var botplayTxt:FlxText;
+
+	var engineDisplay:String = "MINT ENGINE v" + MainMenuState.mintEngineVersion;
 
 	public var iconP1:HealthIcon;
 	public var iconP2:HealthIcon;
@@ -1168,16 +1170,16 @@ class PlayState extends MusicBeatState
 		iconP2.alpha = ClientPrefs.healthBarAlpha;
 		add(iconP2);
 		reloadHealthBarColors();
+		
 
 	if (ClientPrefs.watermark)
 	{
-		engineWatermark = new FlxText(healthBarBG.x + healthBarBG.width + 150, healthBarBG.y + 40, 0,
-		(Main.watermarks ? "Mint Engine":""), 50);
-		engineWatermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		engineWatermark.scrollFactor.set();
+		engineWatermark = new FlxText(0, 0, 0, engineDisplay);
+		engineWatermark.setFormat(Paths.font('vcr.ttf'), 18, FlxColor.WHITE);
+		engineWatermark.setBorderStyle(OUTLINE, FlxColor.BLACK, 2);
 		add(engineWatermark);
-		if(ClientPrefs.downScroll)
-			engineWatermark.y = FlxG.height * 0.9 + 45;	
+		engineWatermark.setPosition(FlxG.width - (engineWatermark.width + 5), 5);
+		engineWatermark.antialiasing = true;
 	}
 
 		scoreTxt = new FlxText(0, healthBarBG.y + 36, FlxG.width, "", 20);
@@ -1187,7 +1189,7 @@ class PlayState extends MusicBeatState
 		scoreTxt.visible = !ClientPrefs.hideHud;
 		add(scoreTxt);
 
-		botplayTxt = new FlxText(400, timeBarBG.y + 55, FlxG.width - 800, "BOTPLAY", 32);
+		botplayTxt = new FlxText(400, timeBarBG.y + 55, FlxG.width - 800, "AUTO", 32);
 		botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		botplayTxt.scrollFactor.set();
 		botplayTxt.borderSize = 1.25;
@@ -1211,12 +1213,7 @@ class PlayState extends MusicBeatState
 		timeTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
 		engineWatermark.cameras = [camHUD];
-
-		// if (SONG.song == 'South')
-		// FlxG.camera.alpha = 0.7;
-		// UI_camera.zoom = 1;
-
-		// cameras = [FlxG.cameras.list[1]];
+		
 		startingSong = true;
 		
 		#if LUA_ALLOWED
@@ -2330,10 +2327,10 @@ class PlayState extends MusicBeatState
 
 	public function updateScore(miss:Bool = false)
 	{
-		scoreTxt.text = 'Score: ' + songScore
-		+ ' • Combo Breaks: ' + songMisses
-		+ ' • Accuracy: ' + ratingName
-		+ (ratingName != '?' ? ' (${Highscore.floorDecimal(ratingPercent * 100, 2)}%) • Grade: $ratingFC' : '');
+		scoreTxt.text = 'Score - ' + songScore
+		+ ' : Combo Breaks - ' + songMisses
+		+ ' : Accuracy - ' + ratingName
+		+ (ratingName != '?' ? ' (${Highscore.floorDecimal(ratingPercent * 100, 2)}%) : Grade - $ratingFC' : '');
 
 		if(ClientPrefs.scoreZoom && !miss && !cpuControlled)
 		{
@@ -4183,11 +4180,11 @@ class PlayState extends MusicBeatState
 		comboSpr.x = coolText.x;
 		comboSpr.acceleration.y = FlxG.random.int(200, 300) * playbackRate * playbackRate;
 		comboSpr.velocity.y -= FlxG.random.int(140, 160) * playbackRate;
-		//comboSpr.visible = (!ClientPrefs.hideHud && showCombo);
+		comboSpr.visible = (!ClientPrefs.hideHud && showRating);
 		comboSpr.x += ClientPrefs.comboOffset[0];
 		comboSpr.y -= ClientPrefs.comboOffset[1];
 		comboSpr.y += 60;
-		comboSpr.velocity.x += FlxG.random.int(1, 10) * playbackRate;
+		comboSpr.velocity.x += FlxG.random.int(0, 10) * playbackRate;
 
 		if (combo >= 0)
 			{	
@@ -4278,39 +4275,33 @@ class PlayState extends MusicBeatState
 			if(showComboNum)
 				insert(members.indexOf(strumLineNotes), numScore);
 
-			FlxTween.tween(numScore, {alpha: 0}, 0.2 / playbackRate, {
+			FlxTween.tween(numScore, {alpha: 0}, 0.1 / playbackRate, {
 				onComplete: function(tween:FlxTween)
 				{
 					numScore.destroy();
 				},
-				startDelay: Conductor.crochet * 0.002 / playbackRate
+				startDelay: Conductor.crochet * 0.001 / playbackRate
 			});
 
 			daLoop++;
 			if(numScore.x > xThing) xThing = numScore.x;
 		}
 		comboSpr.x = xThing + 50;
-		/*
-			trace(combo);
-			trace(seperatedScore);
-		 */
 
 		coolText.text = Std.string(seperatedScore);
-		// add(coolText);
 
-		FlxTween.tween(rating, {alpha: 0}, 0.2 / playbackRate, {
+		FlxTween.tween(rating, {alpha: 0}, 0.1 / playbackRate, {
 			startDelay: Conductor.crochet * 0.001 / playbackRate
 		});
 
-		FlxTween.tween(comboSpr, {alpha: 0}, 0.2 / playbackRate, {
+		FlxTween.tween(comboSpr, {alpha: 0}, 0.1 / playbackRate, {
 			onComplete: function(tween:FlxTween)
 			{
 				coolText.destroy();
 				comboSpr.destroy();
-
 				rating.destroy();
 			},
-			startDelay: Conductor.crochet * 0.002 / playbackRate
+			startDelay: Conductor.crochet * 0.001 / playbackRate
 		});
 	}
 
@@ -5128,7 +5119,7 @@ class PlayState extends MusicBeatState
 			if (camZooming && FlxG.camera.zoom < 1.35 && ClientPrefs.camZooms)
 			{
 				FlxG.camera.zoom += 0.015 * camZoomingMult;
-				camHUD.zoom += 0.03 * camZoomingMult;
+				camHUD.zoom += 0.05 * camZoomingMult;
 			}
 
 			if (SONG.notes[curSection].changeBPM)
