@@ -13,7 +13,7 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import lime.utils.Assets;
 import flixel.FlxSubState;
-import data.Achievements;
+import data.Medals;
 import backend.Paths;
 import data.Controls;
 import menus.MainMenuState;
@@ -22,22 +22,22 @@ import ui.Alphabet;
 import data.ClientPrefs;
 using StringTools;
 
-class AchievementsMenuState extends MusicBeatState
+class MedalsMenuState extends MusicBeatState
 {
-	#if ACHIEVEMENTS_ALLOWED
+	#if MEDALS_ALLOWED
 	var options:Array<String> = [];
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private static var curSelected:Int = 0;
-	private var achievementArray:Array<AttachedAchievement> = [];
-	private var achievementIndex:Array<Int> = [];
+	private var medalArray:Array<AttachedMedal> = [];
+	private var medalIndex:Array<Int> = [];
 	private var descText:FlxText;
 
 	override function create() {
 		#if desktop
-		DiscordClient.changePresence("Achievements Menu", null);
+		DiscordClient.changePresence("Medals Menu", null);
 		#end
 
-		var menuBG:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuBGMagenta'));
+		var menuBG:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menus/mainmenu/menuBGMagenta'));
 		menuBG.setGraphicSize(Std.int(menuBG.width * 1.1));
 		menuBG.updateHitbox();
 		menuBG.screenCenter();
@@ -47,25 +47,25 @@ class AchievementsMenuState extends MusicBeatState
 		grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);
 
-		Achievements.loadAchievements();
-		for (i in 0...Achievements.achievementsStuff.length) {
-			if(!Achievements.achievementsStuff[i][3] || Achievements.achievementsMap.exists(Achievements.achievementsStuff[i][2])) {
-				options.push(Achievements.achievementsStuff[i]);
-				achievementIndex.push(i);
+		Medals.loadMedals();
+		for (i in 0...Medals.medalsStuff.length) {
+			if(!Medals.medalsStuff[i][3] || Medals.medalsMap.exists(Medals.medalsStuff[i][2])) {
+				options.push(Medals.medalsStuff[i]);
+				medalIndex.push(i);
 			}
 		}
 
 		for (i in 0...options.length) {
-			var achieveName:String = Achievements.achievementsStuff[achievementIndex[i]][2];
-			var optionText:Alphabet = new Alphabet(280, 300, Achievements.isAchievementUnlocked(achieveName) ? Achievements.achievementsStuff[achievementIndex[i]][0] : '?', false);
+			var achieveName:String = Medals.medalsStuff[medalIndex[i]][2];
+			var optionText:Alphabet = new Alphabet(280, 300, Medals.isMedalUnlocked(achieveName) ? Medals.medalsStuff[medalIndex[i]][0] : '?', false);
 			optionText.isMenuItem = true;
 			optionText.targetY = i - curSelected;
 			optionText.snapToPosition();
 			grpOptions.add(optionText);
 
-			var icon:AttachedAchievement = new AttachedAchievement(optionText.x - 105, optionText.y, achieveName);
+			var icon:AttachedMedal = new AttachedMedal(optionText.x - 105, optionText.y, achieveName);
 			icon.sprTracker = optionText;
-			achievementArray.push(icon);
+			medalArray.push(icon);
 			add(icon);
 		}
 
@@ -114,13 +114,13 @@ class AchievementsMenuState extends MusicBeatState
 			}
 		}
 
-		for (i in 0...achievementArray.length) {
-			achievementArray[i].alpha = 0.6;
+		for (i in 0...medalArray.length) {
+			medalArray[i].alpha = 0.6;
 			if(i == curSelected) {
-				achievementArray[i].alpha = 1;
+				medalArray[i].alpha = 1;
 			}
 		}
-		descText.text = Achievements.achievementsStuff[achievementIndex[curSelected]][1];
+		descText.text = Medals.medalsStuff[medalIndex[curSelected]][1];
 		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 	}
 	#end

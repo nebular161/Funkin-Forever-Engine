@@ -70,7 +70,6 @@ class WeekData {
 		return weekFile;
 	}
 
-	// HELP: Is there any way to convert a WeekFile to WeekData without having to put all variables there manually? I'm kind of a noob in haxe lmao
 	public function new(weekFile:WeekFile, fileName:String) {
 		songs = weekFile.songs;
 		weekCharacters = weekFile.weekCharacters;

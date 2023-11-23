@@ -56,7 +56,7 @@ import flixel.effects.particles.FlxParticle;
 import flixel.util.FlxSave;
 import flixel.animation.FlxAnimationController;
 import animateatlas.AtlasFrameMaker;
-import data.Achievements;
+import data.Medals;
 import data.StageData;
 import scripts.FunkinLua;
 import gameplay.cutscenes.*;
@@ -318,7 +318,7 @@ class PlayState extends MusicBeatState
 	var detailsPausedText:String = "";
 	#end
 
-	//Achievement shit
+	//Medal shit
 	var keysPressed:Array<Bool> = [];
 	var boyfriendIdleTime:Float = 0.0;
 	var boyfriendIdled:Bool = false;
@@ -399,7 +399,7 @@ class PlayState extends MusicBeatState
 		rating.noteSplash = false;
 		ratingsData.push(rating);
 
-		// For the "Just the Two of Us" achievement
+		// For the "Just the Two of Us" medal
 		for (i in 0...keysArray.length)
 		{
 			keysPressed.push(false);
@@ -1067,7 +1067,7 @@ class PlayState extends MusicBeatState
 		}
 		updateTime = showTime;
 
-		timeBarBG = new AttachedSprite('timeBar');
+		timeBarBG = new AttachedSprite('objs/bars/timeBar');
 		timeBarBG.x = timeTxt.x;
 		timeBarBG.y = timeTxt.y + (timeTxt.height / 4);
 		timeBarBG.scrollFactor.set();
@@ -1139,7 +1139,7 @@ class PlayState extends MusicBeatState
 		FlxG.fixedTimestep = false;
 		moveCameraSection();
 
-		healthBarBG = new AttachedSprite('healthBar');
+		healthBarBG = new AttachedSprite('objs/bars/healthBar');
 		healthBarBG.y = FlxG.height * 0.89;
 		healthBarBG.screenCenter(X);
 		healthBarBG.scrollFactor.set();
@@ -3036,7 +3036,7 @@ class PlayState extends MusicBeatState
 			camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
 			if(!startingSong && !endingSong && boyfriend.animation.curAnim != null && boyfriend.animation.curAnim.name.startsWith('idle')) {
 				boyfriendIdleTime += elapsed;
-				if(boyfriendIdleTime >= 0.15) { // Kind of a mercy thing for making the achievement easier to get as it's apparently frustrating to some playerss
+				if(boyfriendIdleTime >= 0.15) { // Kind of a mercy thing for making the medal easier to get as it's apparently frustrating to some playerss
 					boyfriendIdled = true;
 				}
 			} else {
@@ -3940,16 +3940,16 @@ class PlayState extends MusicBeatState
 		deathCounter = 0;
 		seenCutscene = false;
 
-		#if ACHIEVEMENTS_ALLOWED
-		if(achievementObj != null) {
+		#if MEDALS_ALLOWED
+		if(medalObj != null) {
 			return;
 		} else {
-			var achieve:String = checkForAchievement(['week1_nomiss', 'week2_nomiss', 'week3_nomiss', 'week4_nomiss',
+			var achieve:String = checkForMedal(['week1_nomiss', 'week2_nomiss', 'week3_nomiss', 'week4_nomiss',
 				'week5_nomiss', 'week6_nomiss', 'week7_nomiss', 'ur_bad',
 				'ur_good', 'hype', 'two_keys', 'toastie', 'debugger']);
 
 			if(achieve != null) {
-				startAchievement(achieve);
+				startMedal(achieve);
 				return;
 			}
 		}
@@ -4060,17 +4060,17 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	#if ACHIEVEMENTS_ALLOWED
-	var achievementObj:AchievementObject = null;
-	function startAchievement(achieve:String) {
-		achievementObj = new AchievementObject(achieve, camOther);
-		achievementObj.onFinish = achievementEnd;
-		add(achievementObj);
-		trace('Giving achievement ' + achieve);
+	#if MEDALS_ALLOWED
+	var medalObj:MedalObject = null;
+	function startMedal(achieve:String) {
+		medalObj = new MedalObject(achieve, camOther);
+		medalObj.onFinish = medalEnd;
+		add(medalObj);
+		trace('Giving medal ' + achieve);
 	}
-	function achievementEnd():Void
+	function medalEnd():Void
 	{
-		achievementObj = null;
+		medalObj = null;
 		if(endingSong && !inCutscene) {
 			endSong();
 		}
@@ -4158,7 +4158,7 @@ class PlayState extends MusicBeatState
 
 		if (PlayState.isPixelStage)
 		{
-			pixelShitPart1 = 'pixelUI/';
+			pixelShitPart1 = 'objs/pixelUI/';
 			pixelShitPart2 = '-pixel';
 		}
 
@@ -4174,22 +4174,22 @@ class PlayState extends MusicBeatState
 		rating.x += ClientPrefs.comboOffset[0];
 		rating.y -= ClientPrefs.comboOffset[1];
 
-		var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'combo' + pixelShitPart2));
+		var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'combo' + pixelShitPart2)); //temp remove i think
 		comboSpr.cameras = [camHUD];
 		comboSpr.screenCenter();
 		comboSpr.x = coolText.x;
 		comboSpr.acceleration.y = FlxG.random.int(200, 300) * playbackRate * playbackRate;
 		comboSpr.velocity.y -= FlxG.random.int(140, 160) * playbackRate;
-		comboSpr.visible = (!ClientPrefs.hideHud && showRating);
+		//comboSpr.visible = (!ClientPrefs.hideHud && showCombo);
 		comboSpr.x += ClientPrefs.comboOffset[0];
 		comboSpr.y -= ClientPrefs.comboOffset[1];
 		comboSpr.y += 60;
 		comboSpr.velocity.x += FlxG.random.int(0, 10) * playbackRate;
 
-		if (combo >= 0)
+		/*if (combo >= 0)
 			{	
 				add(comboSpr);
-			}	
+			}*/
 
 		insert(members.indexOf(strumLineNotes), rating);
 		
@@ -4247,8 +4247,8 @@ class PlayState extends MusicBeatState
 			var numScore:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'num' + Std.int(i) + pixelShitPart2));
 			numScore.cameras = [camHUD];
 			numScore.screenCenter();
-			numScore.x = coolText.x + (43 * daLoop) - 90;
-			numScore.y += 80;
+			numScore.x = coolText.x + (43 * daLoop) - 1;
+			numScore.y += 50;
 
 			numScore.x += ClientPrefs.comboOffset[2];
 			numScore.y -= ClientPrefs.comboOffset[3];
@@ -4275,12 +4275,12 @@ class PlayState extends MusicBeatState
 			if(showComboNum)
 				insert(members.indexOf(strumLineNotes), numScore);
 
-			FlxTween.tween(numScore, {alpha: 0}, 0.1 / playbackRate, {
+			FlxTween.tween(numScore, {alpha: 0}, 0.15 / playbackRate, {
 				onComplete: function(tween:FlxTween)
 				{
 					numScore.destroy();
 				},
-				startDelay: Conductor.crochet * 0.001 / playbackRate
+				startDelay: Conductor.crochet * 0.0005 / playbackRate
 			});
 
 			daLoop++;
@@ -4290,8 +4290,8 @@ class PlayState extends MusicBeatState
 
 		coolText.text = Std.string(seperatedScore);
 
-		FlxTween.tween(rating, {alpha: 0}, 0.1 / playbackRate, {
-			startDelay: Conductor.crochet * 0.001 / playbackRate
+		FlxTween.tween(rating, {alpha: 0}, 0.15 / playbackRate, {
+			startDelay: Conductor.crochet * 0.0005 / playbackRate
 		});
 
 		FlxTween.tween(comboSpr, {alpha: 0}, 0.1 / playbackRate, {
@@ -4372,7 +4372,7 @@ class PlayState extends MusicBeatState
 				// I dunno what you need this for but here you go
 				//									- Shubs
 
-				// Shubs, this is for the "Just the Two of Us" achievement lol
+				// Shubs, this is for the "Just the Two of Us" medal lol
 				//									- Shadow Mario
 				keysPressed[key] = true;
 
@@ -4470,10 +4470,10 @@ class PlayState extends MusicBeatState
 			});
 
 			if (parsedHoldArray.contains(true) && !endingSong) {
-				#if ACHIEVEMENTS_ALLOWED
-				var achieve:String = checkForAchievement(['oversinging']);
+				#if MEDALS_ALLOWED
+				var achieve:String = checkForMedal(['oversinging']);
 				if (achieve != null) {
-					startAchievement(achieve);
+					startMedal(achieve);
 				}
 				#end
 			}
@@ -4760,7 +4760,7 @@ class PlayState extends MusicBeatState
 	}
 
 	public function spawnNoteSplash(x:Float, y:Float, data:Int, ?note:Note = null) {
-		var skin:String = 'splashes';
+		var skin:String = 'objs/splashes/splashes';
 		if(PlayState.SONG.splashSkin != null && PlayState.SONG.splashSkin.length > 0) skin = PlayState.SONG.splashSkin;
 
 		var hue:Float = 0;
@@ -4916,16 +4916,16 @@ class PlayState extends MusicBeatState
 				limoCorpseTwo.visible = false;
 				limoKillingState = 1;
 
-				#if ACHIEVEMENTS_ALLOWED
-				Achievements.henchmenDeath++;
-				FlxG.save.data.henchmenDeath = Achievements.henchmenDeath;
-				var achieve:String = checkForAchievement(['roadkill_enthusiast']);
+				#if MEDALS_ALLOWED
+				Medals.henchmenDeath++;
+				FlxG.save.data.henchmenDeath = Medals.henchmenDeath;
+				var achieve:String = checkForMedal(['roadkill_enthusiast']);
 				if (achieve != null) {
-					startAchievement(achieve);
+					startMedal(achieve);
 				} else {
 					FlxG.save.flush();
 				}
-				FlxG.log.add('Deaths: ' + Achievements.henchmenDeath);
+				FlxG.log.add('Deaths: ' + Medals.henchmenDeath);
 				#end
 			}
 		}
@@ -5234,24 +5234,24 @@ class PlayState extends MusicBeatState
 		setOnLuas('ratingFC', ratingFC);
 	}
 
-	#if ACHIEVEMENTS_ALLOWED
-	private function checkForAchievement(achievesToCheck:Array<String> = null):String
+	#if MEDALS_ALLOWED
+	private function checkForMedal(achievesToCheck:Array<String> = null):String
 	{
 		if(chartingMode) return null;
 
 		var usedPractice:Bool = (ClientPrefs.getGameplaySetting('practice', false) || ClientPrefs.getGameplaySetting('botplay', false));
 		for (i in 0...achievesToCheck.length) {
-			var achievementName:String = achievesToCheck[i];
-			if(!Achievements.isAchievementUnlocked(achievementName) && !cpuControlled) {
+			var medalName:String = achievesToCheck[i];
+			if(!Medals.isMedalUnlocked(medalName) && !cpuControlled) {
 				var unlock:Bool = false;
 				
-				if (achievementName.contains(WeekData.getWeekFileName()) && achievementName.endsWith('nomiss')) // any FC achievements, name should be "weekFileName_nomiss", e.g: "weekd_nomiss";
+				if (medalName.contains(WeekData.getWeekFileName()) && medalName.endsWith('nomiss')) // any FC medals, name should be "weekFileName_nomiss", e.g: "weekd_nomiss";
 				{
 					if(isStoryMode && campaignMisses + songMisses < 1 && CoolUtil.difficultyString() == 'HARD'
 						&& storyPlaylist.length <= 1 && !changedDifficulty && !usedPractice)
 						unlock = true;
 				}
-				switch(achievementName)
+				switch(medalName)
 				{
 					case 'ur_bad':
 						if(ratingPercent < 0.2 && !practiceMode) {
@@ -5262,7 +5262,7 @@ class PlayState extends MusicBeatState
 							unlock = true;
 						}
 					case 'roadkill_enthusiast':
-						if(Achievements.henchmenDeath >= 100) {
+						if(Medals.henchmenDeath >= 100) {
 							unlock = true;
 						}
 					case 'oversinging':
@@ -5295,8 +5295,8 @@ class PlayState extends MusicBeatState
 				}
 
 				if(unlock) {
-					Achievements.unlockAchievement(achievementName);
-					return achievementName;
+					Medals.unlockMedal(medalName);
+					return medalName;
 				}
 			}
 		}

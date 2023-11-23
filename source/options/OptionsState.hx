@@ -35,7 +35,7 @@ using StringTools;
 
 class OptionsState extends MusicBeatState
 {
-	var options:Array<String> = ['Strum Colors', 'Keybinds', 'Adjust Delay and Combo', 'Performance', 'UI', 'Gameplay'];
+	var options:Array<String> = ['Strum Colors', 'Keybinds', 'Offset and Combo Adjust', 'Performance', 'UI', 'Gameplay'];
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private static var curSelected:Int = 0;
 	public static var menuBG:FlxSprite;
@@ -52,7 +52,7 @@ class OptionsState extends MusicBeatState
 				openSubState(new VisualsUISubState());
 			case 'Gameplay':
 				openSubState(new GameplaySettingsSubState());
-			case 'Adjust Delay and Combo':
+			case 'Offset and Combo Adjust':
 				LoadingState.loadAndSwitchState(new NoteOffsetState());
 		}
 	}
@@ -65,8 +65,8 @@ class OptionsState extends MusicBeatState
 		DiscordClient.changePresence("Options Menu", null);
 		#end
 
-		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
-		bg.color = 0xff5bffa5;
+		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menus/mainmenu/menuDesat'));
+		bg.color = 0xff3aca7b;
 		bg.updateHitbox();
 
 		bg.screenCenter();

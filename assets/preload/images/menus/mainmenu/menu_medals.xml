@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="menu_medals.png">
+	<!-- Created with Adobe Animate version 18.0.2.126 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="medals basic0000" x="0" y="0" width="642" height="165"/>
+	<SubTexture name="medals basic0001" x="0" y="0" width="642" height="165"/>
+	<SubTexture name="medals basic0002" x="0" y="0" width="642" height="165"/>
+	<SubTexture name="medals white0000" x="0" y="165" width="642" height="165"/>
+	<SubTexture name="medals white0001" x="0" y="165" width="642" height="165"/>
+	<SubTexture name="medals white0002" x="0" y="165" width="642" height="165"/>
+</TextureAtlas>

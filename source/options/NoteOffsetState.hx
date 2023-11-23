@@ -421,8 +421,8 @@ class NoteOffsetState extends MusicBeatState
 		rating.y -= 60 + ClientPrefs.comboOffset[1];
 
 		comboNums.screenCenter();
-		comboNums.x = coolText.x - 90 + ClientPrefs.comboOffset[2];
-		comboNums.y += 80 - ClientPrefs.comboOffset[3];
+		comboNums.x = coolText.x - 1 + ClientPrefs.comboOffset[2];
+		comboNums.y += 50 - ClientPrefs.comboOffset[3];
 		reloadTexts();
 	}
 
