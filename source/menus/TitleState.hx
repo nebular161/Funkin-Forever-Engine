@@ -124,7 +124,7 @@ class TitleState extends MusicBeatState
 		swagShader = new ColorSwap();
 		super.create();
 
-		FlxG.save.bind('funkin', 'kaidbox');
+		FlxG.save.bind('funkin', 'echocyn');
 
 		ClientPrefs.loadPrefs();
 
@@ -608,13 +608,13 @@ class TitleState extends MusicBeatState
 					FlxG.sound.music.fadeIn(4, 0, 0.7);
 				case 2:
 					#if PSYCH_WATERMARKS
-					createCoolText(['Mint Engine by'], 15);
+					createCoolText(['Wired Engine by'], 15);
 					#else
 					createCoolText(['ninjamuffin99', 'phantomArcade', 'kawaisprite', 'evilsk8er']);
 					#end
 				case 4:
 					#if PSYCH_WATERMARKS
-					addMoreText('Kaidbox', 15);
+					addMoreText('echocyn', 15);
 					#else
 					addMoreText('present');
 					#end

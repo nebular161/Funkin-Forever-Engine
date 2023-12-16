@@ -120,10 +120,10 @@ class VisualsUISubState extends BaseOptionsMenu
 		addOption(option);
 
 		var option:Option = new Option('Watermark',
-		"If checked, you'll see the engine's watermark when you play a song.",
-		'watermark',
-		'bool',
-		false);
+			"If checked, you'll see the engine's watermark when you play a song.",
+			'watermark',
+			'bool',
+			true);
 	   addOption(option);
 
 		super();

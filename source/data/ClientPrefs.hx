@@ -12,7 +12,7 @@ import options.PlayerSettings;
 
 class ClientPrefs {
 	public static var downScroll:Bool = false;
-	public static var watermark:Bool = false;
+	public static var watermark:Bool = true;
 	public static var middleScroll:Bool = false;
 	public static var opponentStrums:Bool = true;
 	public static var showFPS:Bool = true;
@@ -129,7 +129,7 @@ class ClientPrefs {
 		FlxG.save.flush();
 
 		var save:FlxSave = new FlxSave();
-		save.bind('settings', 'kaidbox'); //Placing this in a separate save so that it can be manually deleted without removing your Score and stuff
+		save.bind('settings', 'echocyn'); //Placing this in a separate save so that it can be manually deleted without removing your Score and stuff
 		save.data.customControls = keyBinds;
 		save.flush();
 		FlxG.log.add("Settings saved!");
@@ -260,7 +260,7 @@ class ClientPrefs {
 			comboStacking = FlxG.save.data.comboStacking;
 
 		var save:FlxSave = new FlxSave();
-		save.bind('settings', 'kaidbox');
+		save.bind('settings', 'echocyn');
 		if(save != null && save.data.customControls != null) {
 			var loadedControls:Map<String, Array<FlxKey>> = save.data.customControls;
 			for (control => keys in loadedControls) {

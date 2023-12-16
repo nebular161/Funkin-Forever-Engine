@@ -2,7 +2,7 @@
 <project>
 	<!-- _________________________ Application Settings _________________________ -->
 
-	<app title="Friday Night Funkin' - Mint Engine" file="MintEngine" packageName="com.kaidbox.mintengine" package="com.kaidbox.mintengine" main="backend.Main" version="0.2.8" company="Kaidbox" />
+	<app title="Friday Night Funkin' - Wired Engine" file="WiredEngine" packageName="com.echocyn.wiredengine" package="com.echocyn.wiredengine" main="backend.Main" version="0.2.8" company="echocyn" />
 
 	<!--Switch Export with Unique ApplicationID and Icon-->
 	<set name="APP_ID" value="0x0100f6c013bbc000" />

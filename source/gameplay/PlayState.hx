@@ -229,8 +229,6 @@ class PlayState extends MusicBeatState
 	public var botplaySine:Float = 0;
 	public var botplayTxt:FlxText;
 
-	var engineDisplay:String = "MINT ENGINE v" + MainMenuState.mintEngineVersion;
-
 	public var iconP1:HealthIcon;
 	public var iconP2:HealthIcon;
 	public var camHUD:FlxCamera;
@@ -282,8 +280,6 @@ class PlayState extends MusicBeatState
 	var tankGround:BGSprite;
 	var tankmanRun:FlxTypedGroup<TankmenBG>;
 	var foregroundSprites:FlxTypedGroup<BGSprite>;
-
-	var engineWatermark:FlxText;
 
 	public var songScore:Int = 0;
 	public var songHits:Int = 0;
@@ -1174,12 +1170,18 @@ class PlayState extends MusicBeatState
 
 	if (ClientPrefs.watermark)
 	{
+		var engineDisplay:String = "Wired Engine v" + MainMenuState.wiredEngineVersion;
+
+		var engineWatermark:FlxText;  //Putting this here because disabling the option causes a crash
+
 		engineWatermark = new FlxText(0, 0, 0, engineDisplay);
 		engineWatermark.setFormat(Paths.font('vcr.ttf'), 18, FlxColor.WHITE);
 		engineWatermark.setBorderStyle(OUTLINE, FlxColor.BLACK, 2);
 		add(engineWatermark);
 		engineWatermark.setPosition(FlxG.width - (engineWatermark.width + 5), 5);
 		engineWatermark.antialiasing = true;
+
+		engineWatermark.cameras = [camHUD];
 	}
 
 		scoreTxt = new FlxText(0, healthBarBG.y + 36, FlxG.width, "", 20);
@@ -1212,7 +1214,6 @@ class PlayState extends MusicBeatState
 		timeBarBG.cameras = [camHUD];
 		timeTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
-		engineWatermark.cameras = [camHUD];
 		
 		startingSong = true;
 		
