@@ -124,7 +124,7 @@ class TitleState extends MusicBeatState
 		swagShader = new ColorSwap();
 		super.create();
 
-		FlxG.save.bind('funkin', 'echocyn');
+		FlxG.save.bind('funkin', 'jaiden076');
 
 		ClientPrefs.loadPrefs();
 
@@ -614,7 +614,7 @@ class TitleState extends MusicBeatState
 					#end
 				case 4:
 					#if PSYCH_WATERMARKS
-					addMoreText('echocyn', 15);
+					addMoreText('Jaiden076', 15);
 					#else
 					addMoreText('present');
 					#end

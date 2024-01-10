@@ -255,7 +255,7 @@ class ChartingState extends MusicBeatState
 		ignoreWarnings = FlxG.save.data.ignoreWarnings;
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menus/mainmenu/menuDesat'));
 		bg.scrollFactor.set();
-		bg.color = 0xFF00A06B;
+		bg.color = 0xFF47297E;
 		add(bg);
 
 		gridLayer = new FlxTypedGroup<FlxSprite>();
@@ -2697,7 +2697,7 @@ class ChartingState extends MusicBeatState
 			note.sustainLength = daSus;
 			note.noteType = i[3];
 		} else { //Event note
-			note.loadGraphic(Paths.image('eventArrow'));
+			note.loadGraphic(Paths.image('objs/chart/eventArrow'));
 			note.eventName = getEventName(i[1]);
 			note.eventLength = i[1].length;
 			if(i[1].length < 2)

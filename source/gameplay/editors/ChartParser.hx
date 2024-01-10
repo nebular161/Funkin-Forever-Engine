@@ -23,8 +23,6 @@ class ChartParser
 
 		var row:Int = 0;
 
-		// LMAOOOO STOLE ALL THIS FROM FLXBASETILEMAP LOLOL
-
 		var dopeArray:Array<Int> = [];
 		while (row < heightInTiles)
 		{
