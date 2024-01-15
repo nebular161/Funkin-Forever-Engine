@@ -1,7 +1,7 @@
 {
     "dependencies": [
         {
-            "name": "hxcpp", "type": "haxelib", "version": null
+            "name": "hxcpp", "type": "haxelib", "version": "4.2.1"
         },     
         {
             "name": "flixel", "type": "haxelib", "version": "5.2.2"
