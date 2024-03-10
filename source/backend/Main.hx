@@ -3,6 +3,7 @@ package backend;
 import flixel.graphics.FlxGraphic;
 import flixel.FlxG;
 import flixel.FlxGame;
+import flixel.system.ui.FlxSoundTray;
 import flixel.FlxState;
 import openfl.Assets;
 import openfl.Lib;

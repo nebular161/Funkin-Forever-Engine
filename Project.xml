@@ -2,7 +2,7 @@
 <project>
 	<!-- _________________________ Application Settings _________________________ -->
 
-	<app title="Friday Night Funkin' - Wired Engine" file="WiredEngine" packageName="com.jaiden076.wiredengine" package="com.jaiden076.wiredengine" main="backend.Main" version="0.2.8" company="jaiden076" />
+	<app title="Friday Night Funkin' - Funkin' Forever" file="Funkin' Forever" packageName="com.jaiden076.funkinforever" package="com.jaiden076.funkinforever" main="backend.Main" version="0.2.8" company="jaiden076" />
 
 	<!--Switch Export with Unique ApplicationID and Icon-->
 	<set name="APP_ID" value="0x0100f6c013bbc000" />

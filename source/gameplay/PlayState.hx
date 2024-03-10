@@ -1170,7 +1170,7 @@ class PlayState extends MusicBeatState
 
 	if (ClientPrefs.watermark)
 	{
-		var engineDisplay:String = "Wired Engine v" + MainMenuState.wiredEngineVersion;
+		var engineDisplay:String = "Funkin' Forever v" + MainMenuState.wiredEngineVersion;
 
 		var engineWatermark:FlxText;  //Putting this here because disabling the option causes a crash
 
@@ -2329,9 +2329,9 @@ class PlayState extends MusicBeatState
 	public function updateScore(miss:Bool = false)
 	{
 		scoreTxt.text = 'Score - ' + songScore
-		+ ' : Combo Breaks - ' + songMisses
-		+ ' : Accuracy - ' + ratingName
-		+ (ratingName != '?' ? ' (${Highscore.floorDecimal(ratingPercent * 100, 2)}%) : Grade - $ratingFC' : '');
+		+ ' / Combo Breaks - ' + songMisses
+		+ ' / Accuracy - ' + ratingName
+		+ (ratingName != '?' ? ' [${Highscore.floorDecimal(ratingPercent * 100, 2)}%] / Grade - [$ratingFC]' : '');
 
 		if(ClientPrefs.scoreZoom && !miss && !cpuControlled)
 		{
@@ -4761,7 +4761,7 @@ class PlayState extends MusicBeatState
 	}
 
 	public function spawnNoteSplash(x:Float, y:Float, data:Int, ?note:Note = null) {
-		var skin:String = 'objs/splashes/splashes';
+		var skin:String = 'objs/splashes/noteSplashes';
 		if(PlayState.SONG.splashSkin != null && PlayState.SONG.splashSkin.length > 0) skin = PlayState.SONG.splashSkin;
 
 		var hue:Float = 0;
